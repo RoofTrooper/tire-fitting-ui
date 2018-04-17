@@ -50,7 +50,11 @@ Ext.define('MyApp.view.main.MainController', {
     },
     onRegisterClick : function () {
 
-        this.redirectTo('users');
+       var userRadio = this.lookupReference('userRadio'),
+           serviceRadio = this.lookupReference('serviceRadio'),
+            url = '';
+       url = userRadio.getChecked() ? "users" : "services";
+       this.redirectTo(url);
     },
     onRegistration : function () {
 

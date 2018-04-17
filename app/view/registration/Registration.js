@@ -40,6 +40,7 @@ Ext.define('MyApp.view.registration.Registration', {
             xtype      : 'fieldcontainer',
             fieldLabel : 'userType',
             defaultType: 'radiofield',
+            reference: 'radiofield',
             defaults: {
                 flex: 1
             },
@@ -51,12 +52,14 @@ Ext.define('MyApp.view.registration.Registration', {
                     inputValue: 'user',
                     id        : 'userType1',
                     checked: 'true',
-                    bind: '{radioUser}'
+                    bind: '{radioUser}',
+                    reference: 'userRadio'
                 }, {
                     boxLabel  : 'Service',
                     name      : 'userType',
                     inputValue: 'service',
-                    id        : 'userType2'
+                    id        : 'userType2',
+                    reference: 'serviceRadio'
                 }
                 
             ]},
