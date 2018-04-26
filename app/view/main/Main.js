@@ -18,29 +18,9 @@ Ext.define('MyApp.view.main.Main', {
     items: [{
 
         title: 'Login',
-        id: 'login',
+        itemId: 'login',
         reference: 'logintab',
-        html: '<h1 class="main-banner">Enter your login and password</h1>',
-        items: [{
-            xtype: 'textfield',
-            label: 'Login',
-            bind: '{login}'
-        },{
-            xtype: 'passwordfield',
-            label: 'Password',
-            bind:  '{password}',
-            listeners: {
-                action: 'onLoginClick'
-            }
-        },{
-            xtype: 'button',
-            handler: 'onLoginClick',
-            bind: {
-                disabled: '{!password||!login}',
-                text: 'Login'
-            }
-
-        }]
+        xtype: 'login'
     }, {
         title: 'Registration',
         xtype: 'registration',  // <<== add to main view
@@ -64,8 +44,7 @@ Ext.define('MyApp.view.main.Main', {
      listeners: {
                 activeitemchange: function(me, newval, oldval) {
 
-
-                 this.getController('main').redirectTo(newval.getItemId());
+                 this.getController('main').redirectTo(newval.config.xtype);
 
 
                 }

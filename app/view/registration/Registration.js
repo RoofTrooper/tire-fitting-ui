@@ -1,5 +1,6 @@
 Ext.define('MyApp.view.registration.Registration', {
     extend: 'Ext.Panel',
+    alias: 'view.registration',
     xtype: 'registration', // #1
     requires: [
         'Ext.grid.Grid',

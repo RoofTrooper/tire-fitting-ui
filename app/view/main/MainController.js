@@ -1,95 +1,54 @@
 Ext.define('MyApp.view.main.MainController', {
     extend : 'Ext.app.ViewController',
     alias : 'controller.main',
-
-
-    routes : {
-        'users' : 'onUsers',
-        'services' : 'onServices',
-        'registration' : 'onRegistration',
-        'login' : 'onLogin'
+    listen : {
+        controller : {
+            '#' : {
+                unmatchedroute : 'onRouteChange'
+            }
+        }
     },
+
 
     requires : [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'Ext.field.Text'
     ],
+    onRouteChange : function() {
+      var mainTab = Ext.getCmp('maintab');
+      try {
+          mainTab.removeAll();
+      }
+      catch(ex) {
 
-    onUsers : function() {
-        var userTab = this.lookupReference('usertab'),
-            serviceTab = this.lookupReference('servicetab'),
-            loginTab = this.lookupReference('logintab'),
-            registrationTab = this.lookupReference('registrationtab');
+      }
+      Ext.Msg.alert(window.location.hash.substr(1));
+      mainTab.add(Ext.create({xtype: window.location.hash.substr(1), title: window.location.hash}));
+    },
 
-        Ext.getCmp('maintab').getInnerItems().forEach(function(element) {
-            element.hide();
-            element.tab.hide();
-        });
-        userTab.show();
-        userTab.tab.show();
-        Ext.getCmp('maintab').setActiveItem(userTab);
+    onUserClick : function () {
+
+        this.redirectTo('userworkspace');
 
     },
-    onServices : function() {
-        var userTab = this.lookupReference('usertab'),
-            serviceTab = this.lookupReference('servicetab'),
-            loginTab = this.lookupReference('logintab'),
-            registrationTab = this.lookupReference('registrationtab');
-
-        Ext.getCmp('maintab').getInnerItems().forEach(function(element) {
-            element.hide();
-            element.tab.hide();
-        });
-        serviceTab.show();
-        serviceTab.tab.show();
-        Ext.getCmp('maintab').setActiveItem(serviceTab);
-    },
-    onLoginClick : function () {
-
-        this.redirectTo('users');
-
+    onServiceClick : function () {
+        this.redirectTo('serviceworkspace');
     },
     onRegisterClick : function () {
 
        var userRadio = this.lookupReference('userRadio'),
            serviceRadio = this.lookupReference('serviceRadio'),
             url = '';
-       url = userRadio.getChecked() ? "users" : "services";
+       url = userRadio.getChecked() ? "userworkspace" : "serviceworkspace";
        this.redirectTo(url);
     },
-    onRegistration : function () {
 
-        var userTab = this.lookupReference('usertab'),
-            serviceTab = this.lookupReference('servicetab'),
-            loginTab = this.lookupReference('logintab'),
-            registrationTab = this.lookupReference('registrationtab');
-
-        Ext.getCmp('maintab').getInnerItems().forEach(function(element) {
-            element.hide();
-            element.tab.hide();
-        });
-        registrationTab.show();
-        registrationTab.tab.show();
-        loginTab.tab.show();
-        Ext.getCmp('maintab').setActiveItem(registrationTab);
-
-    },
     onLogin : function () {
 
-        var userTab = this.lookupReference('usertab'),
-            serviceTab = this.lookupReference('servicetab'),
-            loginTab = this.lookupReference('logintab'),
-            registrationTab = this.lookupReference('registrationtab');
+       this.redirectTo('login');
 
-        Ext.getCmp('maintab').getInnerItems().forEach(function(element) {
-            element.hide();
-            element.tab.hide();
-        });
-        loginTab.show();
-        registrationTab.tab.show();
-        loginTab.tab.show();
-        Ext.getCmp('maintab').setActiveItem(loginTab);
-
+    },
+    onRegistration : function () {
+        this.redirectTo('registration');
     }
-
-
-});
+    });

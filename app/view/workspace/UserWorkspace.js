@@ -23,7 +23,7 @@ Ext.define('MyApp.view.workspace.UserWorkspace', {
         text: 'Back to Main'
     },{
         xtype: 'button',
-        handler: 'onServices',
+        handler: 'onServiceClick',
         text: 'Switch to Service'
     }]
 });
